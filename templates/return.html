@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>결과</title>
+</head>
+<body>
+<h1>인증결과</h1><br>
+<p>
+    결과코드 resultCode: {{ auth_resultCode }}<br>
+    결과메시지 resultMsg: {{ auth_resultMsg }}<br>
+    상점아이디 mid: {{ auth_mid }}<br>
+    주문번호 orderNumber: {{ auth_orderNumber }}<br>
+    승인요청 검증 토큰 authToken: {{ auth_authToken }}<br>
+    IDC센터코드 idc_name: {{ auth_idc_name }}<br>
+    승인요청 Url authUrl: {{ auth_authUrl }}<br>
+    망취소요청 Url netCancelUrl: {{ auth_netCancelUrl }}<br>
+    인증결과 인코딩 charset: {{ auth_charset }}<br>
+    가맹점 임의 데이터 merchantData: {{ auth_merchantData }}<br>
+</p>
+<br>
+<h1>승인결과</h1><br>
+<p>
+    결과코드 resultCode: {{ confirm_resultCode }}<br>
+    결과메세지 resultMsg: {{ confirm_resultMsg }}<br>
+    거래번호 tid: {{ confirm_tid }}<br>
+    상점아이디 mid: {{ confirm_mid }}<br>
+    주문번호 MOID: {{ confirm_MOID }}<br>
+    결제금액 TotPrice: {{ confirm_TotPrice }}<br>
+    상품명 goodName: {{ confirm_goodName }}<br>
+    지불수단 payMethod: {{ confirm_payMethod }}<br>
+    승인일자 applDate: {{ confirm_applDate }}<br>
+    승인시간 applTime: {{ confirm_applTime }}<br>
+    이벤트 코드, 카드 할부 및 행사 적용 코드 EventCode: {{ confirm_EventCode }}<br>
+    구매자명 buyerName: {{ confirm_buyerName }}<br>
+    구매자 휴대폰번호 buyerTel: {{ confirm_buyerTel }}<br>
+    구매자 이메일주소 buyerEmail: {{ confirm_buyerEmail }}<br>
+    최종 이메일주소 custEmail: {{ confirm_custEmail }}<br>
+</p>
+<br><br>
+<h1>망처리취소 요청 (인증결과 응답 후 10분 이내)</h1><br>
+<form id="netCancelForm" action="{{SERVER_URL}}net-cancel" method="POST">
+    <input name="netCancelUrl" required="required" type="hidden" value="{{auth_netCancelUrl}}">
+    <input name="mid" required="required" type="hidden" value="{{confirm_mid}}">
+    <input name="authToken" required="required" type="hidden" value="{{auth_authToken}}">
+    <input name="charset" required="required" type="hidden" value="{{auth_charset}}">
+    <input type="submit" value="요청"><br>
+</form>
+<br><br>
+<h1>전체취소 요청</h1><br>
+<form id="allCancelForm" action="{{SERVER_URL}}all-cancel" method="POST">
+    <input name="paymethod" required="required" type="hidden" value="{{confirm_payMethod}}">
+    <input name="mid" required="required" type="hidden" value="{{confirm_mid}}">
+    <input name="tid" required="required" type="hidden" value="{{confirm_tid}}">
+    <label for="msg">취소요청 사유:</label>
+    <input id="msg" name="msg" type="text"><br>
+    <input type="submit" value="요청"><br>
+</form>
+<br><br>
+<h1>부분취소 요청</h1><br>
+<form id="partCancelForm" action="{{SERVER_URL}}part-cancel" method="POST">
+    <input name="paymethod" required="required" type="hidden" value="{{confirm_payMethod}}">
+    <input name="mid" required="required" type="hidden" value="{{confirm_mid}}">
+    <input name="tid" required="required" type="hidden" value="{{confirm_tid}}">
+    <label for="msg">취소요청 사유:</label>
+    <input id="msg" name="msg" type="text"><br>
+    <label for="price">취소요청 금액:</label>
+    <input id="price" name="price" type="text"><br>
+    <input name="TotPrice" required="required" type="hidden" value="{{confirm_TotPrice}}">
+    <input type="submit" value="요청"><br>
+</form>
+<br><br>
+<h1>영수증 조회</h1><br>
+<button onclick="openPopup()">조회</button>
+<script>
+    var tid = "{{confirm_tid}}";
+    console.log(tid); // 없으면 에러 발생. 이유 모름.
+    function openPopup() {
+        window.open("https://iniweb.inicis.com/receipt/iniReceipt.jsp?noTid=" + tid, "Popup Window", "width=500,height=500");
+    }
+</script>
+</body>
+</html>

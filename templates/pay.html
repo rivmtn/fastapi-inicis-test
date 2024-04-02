@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>이니시스 결제창</title>
+</head>
+<body>
+<script charset="UTF-8" src="https://stdpay.inicis.com/stdjs/INIStdPay.js" type="text/javascript"></script>
+<form id="payForm" accept-charset="UTF-8" method="POST">
+    <input name="version" required="required" type="hidden" value="{{version}}">
+    <input name="gopaymethod" required="required" type="hidden" value="{{gopaymethod}}">
+    <input name="mid" required="required" type="hidden" value="{{mid}}">
+    <input name="oid" required="required" type="hidden" value="{{oid}}">
+    <input name="price" required="required" type="hidden" value="{{price}}">
+    <input name="timestamp" required="required" type="hidden" value="{{timestamp}}">
+    <input name="use_chkfake" required="required" type="hidden" value="{{use_chkfake}}">
+    <input name="signature" required="required" type="hidden" value="{{signature}}">
+    <input name="verification" required="required" type="hidden" value="{{verification}}">
+    <input name="mKey" required="required" type="hidden" value="{{mKey}}">
+    <input name="currency" required="required" type="hidden" value="{{currency}}">
+    <input name="goodname" required="required" type="hidden" value="{{goodname}}">
+    <input name="buyername" required="required" type="hidden" value="{{buyername}}">
+    <input name="buyertel" required="required" type="hidden" value="{{buyertel}}">
+    <input name="buyeremail" required="required" type="hidden" value="{{buyeremail}}">
+    <input name="returnUrl" required="required" type="hidden" value="{{returnUrl}}">
+    <input name="closeUrl" required="required" type="hidden" value="{{closeUrl}}">
+    <input name="acceptmethod" required="required" type="hidden" value="{{acceptmethod}}">
+</form>
+<script>
+    (function () {
+        INIStdPay.pay('payForm');
+    })();
+</script>
+</body>
+</html>

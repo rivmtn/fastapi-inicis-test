@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>이니시스 테스트</title>
+</head>
+<body>
+<h1>이니시스 카드 결제 테스트</h1><br><br>
+<form id="inputForm" action="{{SERVER_URL}}pay" method="POST">
+    <label for="gopaymethod">결제 방법:</label>
+    <select id="gopaymethod" name="gopaymethod">
+        <option value="Card">카드</option>
+        <option value="HPP">핸드폰</option>
+    </select><br><br>
+    <label for="price">결제금액:</label>
+    <input id="price" name="price" type="text"><br><br>
+    <label for="goodname">상품명:</label>
+    <input id="goodname" name="goodname" type="text"><br><br>
+    <label for="buyername">구매자명:</label>
+    <input id="buyername" name="buyername" type="text"><br><br>
+    <label for="buyertel">구매자 휴대폰번호:</label>
+    <input id="buyertel" name="buyertel" type="text"><br><br>
+    <label for="buyeremail">구매자 이메일주소:</label>
+    <input id="buyeremail" name="buyeremail" type="email"><br><br>
+    <input type="submit" value="결제하기">
+</form>
+<br><br>
+<h1>이니시스 현금영수증 발행 테스트</h1><br><br>
+<form id="inputForm" action="{{SERVER_URL}}receipt" method="POST">
+    <label for="crPrice">결제금액:</label>
+    <input id="crPrice" name="crPrice" type="text"><br><br>
+    <label for="goodName">상품명:</label>
+    <input id="goodName" name="goodName" type="text"><br><br>
+    <label for="buyerName">구매자명:</label>
+    <input id="buyerName" name="buyerName" type="text"><br><br>
+    <label for="buyerEmail">구매자 이메일주소:</label>
+    <input id="buyerEmail" name="buyerEmail" type="email"><br><br>
+    <label for="regNum">현금영수증 식별번호 ( - 없이 주민번호 or 휴대폰번호 or 사업자번호 ):</label>
+    <input id="regNum" name="regNum" type="text"><br><br>
+    <label for="useOpt">현금영수증 발행용도:</label>
+    <select id="useOpt" name="useOpt">
+        <option value="0">소득공제</option>
+        <option value="1">지출증빙</option>
+    </select><br><br>
+    <input type="submit" value="신청하기">
+</form>
+<br><br>
+</body>
+</html>
